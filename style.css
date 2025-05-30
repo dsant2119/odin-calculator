@@ -28,9 +28,6 @@ html, body {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: nowrap;
-    background-color: grey;
-    color: black;
     min-height: 3em;
     gap: .2em;
     padding: .5em;
@@ -43,7 +40,7 @@ html, body {
 .item {
     display: flex;
     text-align: center;
-    background-color: black;
+    background-color: rgb(34, 33, 33);
     color: white;
     flex: 1;
     min-height: 2.5em;
@@ -51,17 +48,30 @@ html, body {
     justify-content: center;
     border: solid white 1px;
     border-radius: 100px;
+    font-family: 'Courier New', Courier, monospace;
     font-size: larger;
-    font-weight: bold;
+    font-weight: bolder;
     padding: .5em;
+    margin-left: .2em;
+    margin-right: .2em
+}
+
+.item--operator {
+    background-color: orange;
+    font-weight: bolder;
+}
+
+.item--clear {
+    background-color: gray;
 }
 
 .display {
     height: 3em;
     align-self: center;
     justify-content: center;
-    border-radius: 0;
+    border: 0;
     padding: 0;
+    background-color: black;
 }
 
 .footer {
