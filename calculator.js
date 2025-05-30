@@ -27,4 +27,4 @@ const operate = (operator, num1, num2) => {
   else return "INVALID OPERATOR";
 };
 
-console.log(operate("+", 2, 3));
+alert(operate("+", 2, 3));
