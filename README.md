@@ -1,1 +1,1 @@
-# INSERT INFO HERE
+# Calculator project from The Odin Project
