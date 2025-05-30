@@ -28,3 +28,9 @@ const operate = (operator, num1, num2) => {
 };
 
 alert(operate("+", 2, 3));
+alert(operate("-", 5, 2));
+alert(operate("*", 4, 3));
+alert(operate("/", 8, 2));
+alert(operate("/", 8, 0)); // should return undefined
+alert(operate("x", 8, 2)); // should return "INVALID OPERATOR"
+// Test cases
