@@ -1,3 +1,43 @@
 body {
+    background-color: black;
+    margin: auto;
+    height: 100vh;
+}
+
+.title-bar {
     background-color: white;
+    text-align: center;
+    margin: auto;
+    padding:0;
+}
+
+.container {
+    text-align: center;
+    margin: auto;
+    margin-top: 20em;
+    width: 20em;
+    height: 20em;
+    border: solid white 5px;
+    color: white;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    background-color: grey;
+    color: black;
+}
+
+.item {
+    background-color: black;
+    color: white;
+    flex: 1;
+    border: solid white 1px;
+}
+
+.display {
+    
 }
