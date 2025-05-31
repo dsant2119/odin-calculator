@@ -19,7 +19,7 @@ const divide = (num1, num2) => {
   else return num1 / num2;
 };
 
-const operate = (operator, num1, num2) => {
+const calculate = (operator, num1, num2) => {
   if (operator === "+") return add(num1, num2);
   if (operator === "-") return subtract(num1, num2);
   if (operator === "*") return multiply(num1, num2);
@@ -42,13 +42,23 @@ const attachButtonListeners = () => {
   const buttons = document.querySelectorAll(".button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
+      if (button.className === "button button--clear") {
+        displayString = "";
+        firstNumber = "";
+        secondNumber = "";
+        updateDisplay(displayString);
+      }
       if (operationHeld) {
-        console.log(`Operation stored: ${operation}`);
+        // console.log(`Operation stored: ${operation}`);
         if (button.className !== "button button--operator") {
           displayString += button.innerHTML;
         } else if (button.innerHTML === "=") {
-          secondNumber = displayString;
+          secondNumber = Number(displayString);
           console.log(`Second number entered: ${secondNumber}`);
+          const result = calculate(operation, firstNumber, secondNumber);
+          console.log(`Result of calculation: ${result}`);
+          displayString = result;
+          updateDisplay(displayString);
         } else {
           alert(
             "An operator is already stored. Either add more digits or press the '=' key."
@@ -57,7 +67,7 @@ const attachButtonListeners = () => {
         updateDisplay(displayString);
       } else {
         if (button.className === "button button--operator") {
-          firstNumber = displayString;
+          firstNumber = Number(displayString);
           console.log(`First number entered: ${firstNumber}`);
           displayString = button.innerHTML;
           operation = button.innerHTML;
