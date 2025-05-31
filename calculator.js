@@ -27,12 +27,27 @@ const operate = (operator, num1, num2) => {
   else return "INVALID OPERATOR";
 };
 
-let displayString = "0";
+let displayString = "";
 
 const updateDisplay = (displayString) => {
-  const display = document.querySelector(".item display");
+  const display = document.querySelector(".item.display");
   display.innerHTML = displayString;
 };
+
+const attachButtonListeners = () => {
+  const buttons = document.querySelectorAll(".button");
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      displayString += button.innerHTML;
+      updateDisplay(displayString);
+      console.log(displayString);
+    });
+  });
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  attachButtonListeners();
+});
 
 /*
     alert(operate("+", 2, 3));
