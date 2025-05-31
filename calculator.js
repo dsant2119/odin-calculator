@@ -1,4 +1,18 @@
-console.log("Hello world!");
+const state = {
+  displayString: "",
+  firstNumber: null,
+  secondNumber: null,
+  operation: null,
+  operatorHeld: false,
+};
+
+const resetState = () => {
+  state.displayString = "";
+  state.firstNumber = null;
+  state.secondNumber = null;
+  state.operation = null;
+  state.operatorHeld = false;
+};
 
 //  CREATE ADD SUBTRACT MULTIPLY DIVIDE FUNCTIONS
 
@@ -27,12 +41,6 @@ const calculate = (operator, num1, num2) => {
   else return "INVALID OPERATOR";
 };
 
-let displayString = "";
-let firstNumber = "";
-let secondNumber = "";
-let operation = "";
-let operationHeld = false;
-
 const updateDisplay = (displayString) => {
   const display = document.querySelector(".display");
   display.innerHTML = displayString;
@@ -42,41 +50,43 @@ const attachButtonListeners = () => {
   const buttons = document.querySelectorAll(".button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      if (button.className === "button button--clear") {
-        displayString = "";
-        firstNumber = "";
-        secondNumber = "";
-        updateDisplay(displayString);
-      }
-      if (operationHeld) {
-        // console.log(`Operation stored: ${operation}`);
-        if (button.className !== "button button--operator") {
-          displayString += button.innerHTML;
-        } else if (button.innerHTML === "=") {
-          secondNumber = Number(displayString);
-          console.log(`Second number entered: ${secondNumber}`);
-          const result = calculate(operation, firstNumber, secondNumber);
-          console.log(`Result of calculation: ${result}`);
-          displayString = result;
-          updateDisplay(displayString);
-        } else {
-          alert(
-            "An operator is already stored. Either add more digits or press the '=' key."
-          );
-        }
-        updateDisplay(displayString);
+      if (button.classList.contains("button--clear")) {
+        resetState();
+        updateDisplay(state.displayString);
       } else {
-        if (button.className === "button button--operator") {
-          firstNumber = Number(displayString);
-          console.log(`First number entered: ${firstNumber}`);
-          displayString = button.innerHTML;
-          operation = button.innerHTML;
-          operationHeld = true;
-          updateDisplay(displayString);
-          displayString = "";
+        if (state.operatorHeld) {
+          if (!button.classList.contains("button--operator")) {
+            state.displayString += button.innerHTML;
+          } else if (button.innerHTML === "=") {
+            state.secondNumber = Number(state.displayString);
+            console.log(`Second number entered: ${state.secondNumber}`);
+            const result = calculate(
+              state.operation,
+              state.firstNumber,
+              state.secondNumber
+            );
+            console.log(`Result of calculation: ${result}`);
+            state.displayString = result;
+            updateDisplay(state.displayString);
+          } else {
+            alert(
+              "An operator is already stored. Either add more digits or press the '=' key."
+            );
+          }
+          updateDisplay(state.displayString);
         } else {
-          displayString += button.innerHTML;
-          updateDisplay(displayString);
+          if (button.className === "button button--operator") {
+            state.firstNumber = Number(state.displayString);
+            console.log(`First number entered: ${state.firstNumber}`);
+            state.displayString = button.innerHTML;
+            state.operation = button.innerHTML;
+            state.operatorHeld = true;
+            updateDisplay(state.displayString);
+            state.displayString = "";
+          } else {
+            state.displayString += button.innerHTML;
+            updateDisplay(state.displayString);
+          }
         }
       }
     });
