@@ -27,6 +27,13 @@ const operate = (operator, num1, num2) => {
   else return "INVALID OPERATOR";
 };
 
+let displayString = "0";
+
+const updateDisplay = (displayString) => {
+  const display = document.querySelector(".item display");
+  display.innerHTML = displayString;
+};
+
 /*
     alert(operate("+", 2, 3));
     alert(operate("-", 5, 2));
