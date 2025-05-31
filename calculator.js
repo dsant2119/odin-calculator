@@ -68,14 +68,21 @@ const attachButtonListeners = () => {
             console.log(`Result of calculation: ${result}`);
             state.displayString = result;
             updateDisplay(state.displayString);
-          } else {
-            alert(
-              "An operator is already stored. Either add more digits or press the '=' key."
+          } else if (state.firstNumber && state.secondNumber) {
+            console.log(
+              "Second operator pressed while first two numbers saved."
             );
+            state.firstNumber = calculate(
+              state.operation,
+              state.firstNumber,
+              state.secondNumber
+            );
+            state.displayString = state.firstNumber;
           }
           updateDisplay(state.displayString);
         } else {
-          if (button.className === "button button--operator") {
+          // operatorHeld is FALSE
+          if (button.classList.contains("button--operator")) {
             state.firstNumber = Number(state.displayString);
             console.log(`First number entered: ${state.firstNumber}`);
             state.displayString = button.innerHTML;
