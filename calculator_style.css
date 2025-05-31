@@ -18,7 +18,7 @@ html, body {
     margin: auto;
     padding-bottom: 1em;
     text-align: center;
-    width: 25em;
+    width: 20em;
     height: auto;
     border: solid white 3px;
     color: white;
@@ -59,6 +59,8 @@ html, body {
     border: 0;
     padding: 0;
     background-color: black;
+    color: greenyellow;
+    font-family: 'Roboto Mono', monospace;
     font-size: x-large;
     font-weight: bolder;
     margin: .3em;
@@ -87,8 +89,6 @@ html, body {
 
 .button--clear {
     background-color: gray;
-    border-radius: 2%;
-    width: fit-content;
 }
 
 
