@@ -28,6 +28,10 @@ const operate = (operator, num1, num2) => {
 };
 
 let displayString = "";
+let firstNumber = "";
+let secondNumber = "";
+let operation = "";
+let operationHeld = false;
 
 const updateDisplay = (displayString) => {
   const display = document.querySelector(".display");
@@ -38,9 +42,33 @@ const attachButtonListeners = () => {
   const buttons = document.querySelectorAll(".button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      displayString += button.innerHTML;
-      updateDisplay(displayString);
-      console.log(displayString);
+      if (operationHeld) {
+        console.log(`Operation stored: ${operation}`);
+        if (button.className !== "button button--operator") {
+          displayString += button.innerHTML;
+        } else if (button.innerHTML === "=") {
+          secondNumber = displayString;
+          console.log(`Second number entered: ${secondNumber}`);
+        } else {
+          alert(
+            "An operator is already stored. Either add more digits or press the '=' key."
+          );
+        }
+        updateDisplay(displayString);
+      } else {
+        if (button.className === "button button--operator") {
+          firstNumber = displayString;
+          console.log(`First number entered: ${firstNumber}`);
+          displayString = button.innerHTML;
+          operation = button.innerHTML;
+          operationHeld = true;
+          updateDisplay(displayString);
+          displayString = "";
+        } else {
+          displayString += button.innerHTML;
+          updateDisplay(displayString);
+        }
+      }
     });
   });
 };
