@@ -30,7 +30,7 @@ const operate = (operator, num1, num2) => {
 let displayString = "";
 
 const updateDisplay = (displayString) => {
-  const display = document.querySelector(".item.display");
+  const display = document.querySelector(".display");
   display.innerHTML = displayString;
 };
 
