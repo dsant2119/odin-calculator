@@ -58,11 +58,20 @@ const attachButtonListeners = () => {
           console.log("Operator held");
           if (button.id.includes("digit")) {
             state.displayString += button.innerHTML;
+            updateDisplay(state.displayString);
           } else if (button.id.includes("equals")) {
             state.secondNumber = Number(state.displayString);
             console.log(`Second number entered: ${state.secondNumber}`);
             state.operatorHeld = false;
             console.log("Equals pressed. Held operator cleared");
+            state.firstNumber = calculate(
+              state.operation,
+              state.firstNumber,
+              state.secondNumber
+            );
+            console.log(`Result of calculation: ${state.firstNumber}`);
+            state.displayString = state.firstNumber;
+            updateDisplay(state.displayString);
           } else if (
             !button.id.includes("equals") &&
             button.classList.contains("button--operator")
@@ -73,15 +82,13 @@ const attachButtonListeners = () => {
               state.firstNumber,
               state.secondNumber
             );
-            console.log(`Result of calculation: ${state.firstNumber}`);
+            console.log(`Updating firstNumber: ${state.firstNumber}`);
             state.displayString = button.innerHTML;
             state.operation = button.innerHTML;
             console.log(`Operator set as: ${state.operation}`);
-
             updateDisplay(state.displayString);
+            state.displayString = "";
           }
-          state.displayString = state.firstNumber;
-          updateDisplay(state.displayString);
         } else {
           // operatorHeld is FALSE
           if (
