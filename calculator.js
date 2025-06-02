@@ -29,7 +29,7 @@ const multiply = (num1, num2) => {
 };
 
 const divide = (num1, num2) => {
-  if (num2 === 0) return undefined;
+  if (num2 === 0) return "UNDEFINED";
   else return num1 / num2;
 };
 
@@ -72,6 +72,7 @@ const attachButtonListeners = () => {
             console.log(`Result of calculation: ${state.firstNumber}`);
             state.displayString = state.firstNumber;
             updateDisplay(state.displayString);
+            state.displayString = "";
           } else if (
             !button.id.includes("equals") &&
             button.id.includes("op")
