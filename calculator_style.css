@@ -53,6 +53,12 @@ html, body {
     margin: .3em;
 }
 
+.label {
+    text-align: center;
+    font-size: larger;
+    font-weight: 900;
+}
+
 .display {
     display: flex;
     flex: 1;
