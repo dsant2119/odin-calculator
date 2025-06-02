@@ -54,43 +54,49 @@ const attachButtonListeners = () => {
         resetState();
         updateDisplay(state.displayString);
       } else {
-        if (state.operatorHeld) {
-          if (!button.classList.contains("button--operator")) {
+        if (state.firstNumber && state.operatorHeld) {
+          console.log("Operator held");
+          if (button.id.includes("digit")) {
             state.displayString += button.innerHTML;
-          } else if (button.innerHTML === "=") {
+          } else if (button.id.includes("equals")) {
             state.secondNumber = Number(state.displayString);
             console.log(`Second number entered: ${state.secondNumber}`);
-            const result = calculate(
-              state.operation,
-              state.firstNumber,
-              state.secondNumber
-            );
-            console.log(`Result of calculation: ${result}`);
-            state.displayString = result;
-            updateDisplay(state.displayString);
-          } else if (state.firstNumber && state.secondNumber) {
-            console.log(
-              "Second operator pressed while first two numbers saved."
-            );
+            state.operatorHeld = false;
+            console.log("Equals pressed. Held operator cleared");
+          } else if (
+            !button.id.includes("equals") &&
+            button.classList.contains("button--operator")
+          ) {
+            state.secondNumber = Number(state.displayString);
             state.firstNumber = calculate(
               state.operation,
               state.firstNumber,
               state.secondNumber
             );
-            state.displayString = state.firstNumber;
+            console.log(`Result of calculation: ${state.firstNumber}`);
+            state.displayString = button.innerHTML;
+            state.operation = button.innerHTML;
+            console.log(`Operator set as: ${state.operation}`);
+
+            updateDisplay(state.displayString);
           }
+          state.displayString = state.firstNumber;
           updateDisplay(state.displayString);
         } else {
           // operatorHeld is FALSE
-          if (button.classList.contains("button--operator")) {
+          if (
+            state.displayString !== "" &&
+            button.classList.contains("button--operator")
+          ) {
             state.firstNumber = Number(state.displayString);
             console.log(`First number entered: ${state.firstNumber}`);
             state.displayString = button.innerHTML;
             state.operation = button.innerHTML;
+            console.log(`Operator set as: ${state.operation}`);
             state.operatorHeld = true;
             updateDisplay(state.displayString);
             state.displayString = "";
-          } else {
+          } else if (button.id.includes("digit")) {
             state.displayString += button.innerHTML;
             updateDisplay(state.displayString);
           }
