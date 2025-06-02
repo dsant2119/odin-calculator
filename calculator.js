@@ -74,7 +74,7 @@ const attachButtonListeners = () => {
             updateDisplay(state.displayString);
           } else if (
             !button.id.includes("equals") &&
-            button.classList.contains("button--operator")
+            button.id.includes("op")
           ) {
             state.secondNumber = Number(state.displayString);
             state.firstNumber = calculate(
@@ -91,10 +91,7 @@ const attachButtonListeners = () => {
           }
         } else {
           // operatorHeld is FALSE
-          if (
-            state.displayString !== "" &&
-            button.classList.contains("button--operator")
-          ) {
+          if (state.displayString !== "" && button.id.includes("op")) {
             state.firstNumber = Number(state.displayString);
             console.log(`First number entered: ${state.firstNumber}`);
             state.displayString = button.innerHTML;
