@@ -50,8 +50,18 @@ const attachButtonListeners = () => {
   const buttons = document.querySelectorAll(".button");
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      if (button.classList.contains("button--clear")) {
+      if (button.id.includes("clear")) {
         resetState();
+        updateDisplay(state.displayString);
+      } else if (button.id.includes("delete")) {
+        //  Delete last symbol appended
+        if (state.displayString) {
+          console.log("DELETING");
+          state.displayString = state.displayString.substring(
+            0,
+            state.displayString.length - 1
+          );
+        }
         updateDisplay(state.displayString);
       } else {
         if (state.firstNumber && state.operatorHeld) {
